@@ -1,0 +1,126 @@
+Cenários de Teste
+
+1 Transferência com Dados Válidos
+Testar a realização de uma transferência fornecendo todos os dados corretos e verificar se a transferência é concluída com sucesso.
+Premissas:
+
+O cliente tem saldo suficiente.
+Os dados do cliente de destino estão corretos.
+
+2 Transferência com Saldo Insuficiente
+Tentar realizar uma transferência cujo valor exceda o saldo disponível e verificar se o sistema impede a transação.
+Premissas:
+
+O sistema deve validar o saldo antes de permitir a transferência.
+
+3 Cliente Destino Inexistente
+Inserir dados de um cliente de destino que não existe e tentar realizar a transferência, verificando se o sistema apresenta uma mensagem de erro.
+Premissas:
+
+O sistema deve verificar se o cliente de destino existe.
+
+4 Campo Valor Inválido
+Inserir caracteres não numéricos no campo valor e verificar se a transferência é bloqueada.
+Premissas:
+
+O campo valor aceita apenas números.
+
+5 Data de Efetivação no Passado
+Selecionar uma data de efetivação no passado e verificar se o sistema rejeita essa data.
+Premissas:
+
+O sistema não deve permitir datas de efetivação no passado.
+
+6 Data de Efetivação no Futuro
+Selecionar uma data de efetivação no futuro e verificar se a transferência é agendada corretamente.
+Premissas:
+
+O sistema deve permitir agendamento de transferências.
+
+7 Cancelamento de Transferência
+
+Iniciar uma transferência e depois cancelar, verificando se a operação é interrompida sem efetuar a transferência.
+Premissas:
+
+O sistema deve permitir o cancelamento da transferência antes de sua efetivação.
+
+8 Validação dos Campos
+
+Deixar um ou mais campos obrigatórios em branco e tentar realizar a transferência, verificando se o sistema impede a operação.
+Premissas:
+
+O sistema deve validar todos os campos obrigatórios antes de permitir a transferência.
+
+9 Feedback de Sucesso
+
+Após uma transferência bem-sucedida, verificar se o sistema fornece um feedback claro de que a transação foi realizada.
+Premissas:
+
+O sistema deve fornecer uma mensagem de sucesso após a conclusão da transferência.
+10 Atualização do Saldo
+
+Após uma transferência bem-sucedida, verificar se o saldo é atualizado imediatamente para refletir a transação.
+Premissas:
+
+O saldo na tela deve ser atualizado em tempo real após qualquer transação.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Funcionalidade: Transferência Bancária
+
+  Cenário: Transferência com Dados Válidos
+    Dado que o cliente tem saldo suficiente na conta
+    E os dados do cliente de destino estão corretos
+    Quando o cliente realiza uma transferência
+    Então a transferência é concluída com sucesso
+
+  Cenário: Transferência com Saldo Insuficiente
+    Dado que o cliente não tem saldo suficiente na conta para a transferência
+    Quando o cliente tenta realizar a transferência
+    Então a transferência é bloqueada
+    E uma mensagem de saldo insuficiente é apresentada
+
+  Cenário: Cliente Destino Inexistente
+    Dado que os dados do cliente de destino fornecidos não correspondem a uma conta válida
+    Quando o cliente tenta realizar a transferência
+    Então a transferência é bloqueada
+    E uma mensagem de erro indicando cliente de destino inexistente é apresentada
+
+  Cenário: Campo Valor Inválido
+    Dado que o cliente insere caracteres não numéricos no campo valor
+    Quando o cliente tenta realizar a transferência
+    Então a transferência é bloqueada
+    E uma mensagem de erro de valor inválido é apresentada
+
+  Cenário: Data de Efetivação no Passado
+    Dado que o cliente seleciona uma data de efetivação no passado
+    Quando o cliente tenta realizar a transferência
+    Então a transferência é bloqueada
+    E uma mensagem de erro de data inválida é apresentada
+
+  Cenário: Data de Efetivação no Futuro
+    Dado que o cliente seleciona uma data de efetivação no futuro
+    Quando o cliente agenda a transferência
+    Então a transferência é agendada corretamente
+
+  Cenário: Cancelamento de Transferência
+    Dado que o cliente inicia o processo de transferência
+    Quando o cliente cancela a operação antes da sua efetivação
+    Então a transferência é cancelada sem ser efetuada
+
+  Cenário: Validação dos Campos Obrigatórios
+    Dado que um ou mais campos obrigatórios estão em branco
+    Quando o cliente tenta realizar a transferência
+    Então a transferência é bloqueada
+    E uma mensagem de erro de campos obrigatórios é apresentada
+
+  Cenário: Feedback de Sucesso Após Transferência
+    Dado que o cliente realiza uma transferência bem-sucedida
+    Quando a transferência é concluída
+    Então um feedback positivo é fornecido ao cliente
+
+  Cenário: Atualização do Saldo Após Transferência
+    Dado que o cliente realiza uma transferência bem-sucedida
+    Quando a transferência é concluída
+    Então o saldo do cliente é atualizado imediatamente
+
