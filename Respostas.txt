@@ -123,4 +123,37 @@ Funcionalidade: Transferência Bancária
     Dado que o cliente realiza uma transferência bem-sucedida
     Quando a transferência é concluída
     Então o saldo do cliente é atualizado imediatamente
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL
+1 Listar o nome de todos os alunos matriculados na disciplina de Cálculo do professor João
+SELECT Alunos.nome
+FROM Alunos
+JOIN Matriculas ON Alunos.id = Matriculas.aluno_id
+JOIN Disciplinas ON Matriculas.disciplina_id = Disciplinas.id
+JOIN Professores ON Disciplinas.professor_id = Professores.id
+WHERE Disciplinas.nome = 'Cálculo' AND Professores.nome = 'João';
+
+2 Exibir a quantidade de alunos por disciplinas:
+SELECT Disciplinas.nome, COUNT(Matriculas.aluno_id) AS Quantidade_Alunos
+FROM Disciplinas
+JOIN Matriculas ON Disciplinas.id = Matriculas.disciplina_id
+GROUP BY Disciplinas.nome;
+
+3 Listar as disciplinas que todos os professores lecionam
+SELECT Disciplinas.nome
+FROM Disciplinas
+GROUP BY Disciplinas.nome
+HAVING COUNT(DISTINCT Disciplinas.professor_id) = (SELECT COUNT(*) FROM Professores);
+
+4 Exibir o total de professores
+SELECT COUNT(*) AS Total_Professores
+FROM Professores;
+
+5 Listar todos os alunos que cursaram alguma disciplina do ano 2000 até 2020
+SELECT DISTINCT Alunos.nome
+FROM Alunos
+JOIN Matriculas ON Alunos.id = Matriculas.aluno_id
+JOIN Disciplinas ON Matriculas.disciplina_id = Disciplinas.id
+WHERE Disciplinas.ano BETWEEN 2000 AND 2020;
+
 
